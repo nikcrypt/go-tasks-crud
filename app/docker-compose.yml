@@ -1,0 +1,29 @@
+version: "3.9" # Use a recent version of docker-compose
+
+services:
+  app:
+    build: . # Build from the Dockerfile in the current directory
+    ports:
+      - "8080:8080" # Map host port 8080 to container port 8080
+    depends_on:
+      - postgres # Make sure postgres is running before starting the app
+    environment: #Overrides the environment variables in the Dockerfile
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_HOST=postgres
+      - POSTGRES_DB=tasksdb
+    restart: on-failure # Restart if the container crashes
+
+  postgres:
+    image: postgres:15-alpine # Use a lightweight Postgres image
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_DB=tasksdb
+    ports:
+      - "5432:5432" # Expose Postgres port (optional, for direct access from host)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data # Persist data across container restarts
+
+volumes:
+  postgres_data: # Define the named volume
