@@ -34,5 +34,5 @@ This project implements a RESTful API for managing tasks using Go, the Gin web f
 1.  **Clone the repository:**
 
 ```bash
-git clone [https://github.com/yourusername/your-repo-name.git](https://github.com/yourusername/your-repo-name.git)
-cd your-repo-name/app
+https://github.com/nikcrypt/go-tasks-crud.git
+cd go-tasks-crud
